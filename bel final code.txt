@@ -1,0 +1,243 @@
+
+#include <stdio.h>
+#include <glut.h> 
+#include <string.h>// freeglut.h might be a better alternative, if available.
+
+
+void sp(GLint w, GLint z, GLint i)
+{
+	GLint x;
+	GLfloat Z=0.0;
+	x = 100 + (i * 50);
+	Z = z * 0.01;
+	glColor3f(0.0, Z, 0.0);
+	glPointSize(10);
+	glBegin(GL_POINTS);
+	glVertex2i(w, x);
+	glEnd();
+}
+
+void signaldetect()
+{
+	int i,j, n,m;
+	int x = 0;
+	int y = 0;
+	int v[100];
+	printf("Enter no of signals (Maximum of 5): \n");
+	scanf_s("%d", &n);
+	for (i = 1; i <= n; i++) {
+		printf("Enter no of crests in %dth signal: \n",i);
+		scanf_s("%d", &m);
+		for (j = 1; j <= m; j++)
+		{
+			printf("Enter the coordinates: \n");
+			scanf_s("%d%d", &x, &y);
+			printf("\n%d %d\n", x, y);
+			v[j] = 100 + (x * 3);     //30 pixels ge 10 units antha scale... so, 3 pixels = 1 unit
+			v[j + 1] = y;
+			sp(v[j], v[j + 1], i);
+		}
+		
+	}
+
+}
+
+
+void display(void) {  // Display function will draw the image.
+	int i,p,q;
+	float j;
+	const char *s = "time";
+	const char *s1 = "10";
+	const char *s2 = "20";
+	const char *s3 = "30";
+	const char *s4 = "40";
+	const char *s5 = "50";
+	const char *s6 = "60";
+	const char *s7 = "70";
+	const char *s8 = "80";
+	const char *s9 = "90";
+	const char *s10 = "100";
+
+	const char *sn1 = "signal 1";
+	const char *sn2 = "signal 2";
+	const char *sn3 = "signal 3";
+	const char *sn4 = "signal 4";
+	const char *sn5 = "signal 5";
+
+	const char *sca = "00";
+	const char *sca1 = "50";
+	const char *sca2 = "100";
+
+	const char *in = "Altitude Index";
+
+	const char *org = "(0,0)";
+
+
+	glClearColor(0.0, 0, 1.0, 0);  // (In fact, this is the default.)
+	glClear(GL_COLOR_BUFFER_BIT);
+	glLoadIdentity();
+	gluOrtho2D(0, 500, 0, 500);
+	glColor3f(1.0, 1.0, 1.0);
+	glBegin(GL_LINES);
+	glVertex2i(100, 100);  //axis
+	glVertex2i(480, 100);
+	glVertex2i(100, 100);
+	glVertex2i(100, 480);
+
+
+	glVertex2i(100, 150);//signal lines
+	glVertex2i(400, 150);
+
+	glVertex2i(100, 200);
+	glVertex2i(400, 200);
+
+	glVertex2i(100, 250);
+	glVertex2i(400, 250);
+
+	glVertex2i(100, 300);
+	glVertex2i(400, 300);
+
+	glVertex2i(100, 350);
+	glVertex2i(400, 350);
+
+
+	glVertex2i(450, 350);  //For scale
+	glVertex2i(450, 450);
+
+	glVertex2i(450, 450);
+	glVertex2i(455, 450);
+
+	glVertex2i(455, 450);
+	glVertex2i(455, 350);
+
+	glVertex2i(455, 350);
+	glVertex2i(450, 350);
+	glEnd();
+
+	j = 0.01;
+	for (q = 351; q < 450; q++)
+	{
+		glColor3f(0.0, j, 0.0);
+		for (p = 451; p < 455; p++)
+		{
+			glPointSize(1.5);
+			glBegin(GL_POINTS);
+			glVertex2i(p, q);
+			glEnd();
+		}
+		j = j + 0.01;
+	}
+
+
+	glColor3f(1.0, 1.0, 0.0);
+	glRasterPos2f(245, 70);
+	for (i = 0; i < strlen(s); i++)
+		glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, s[i]);   //eddu time display  gee
+
+
+	glRasterPos2f(130, 90);
+	for (i = 0; i < strlen(s1); i++)
+		glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, s1[i]);
+
+	glRasterPos2f(160, 90);
+	for (i = 0; i < strlen(s2); i++)
+		glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, s2[i]);
+
+	glRasterPos2f(190, 90);
+	for (i = 0; i < strlen(s3); i++)
+		glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, s3[i]);
+
+	glRasterPos2f(220, 90);
+	for (i = 0; i < strlen(s4); i++)
+		glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, s4[i]);
+
+	glRasterPos2f(250, 90);
+	for (i = 0; i < strlen(s5); i++)
+		glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, s5[i]);
+
+	glRasterPos2f(280, 90);
+	for (i = 0; i < strlen(s6); i++)
+		glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, s6[i]);
+
+	glRasterPos2f(310, 90);
+	for (i = 0; i < strlen(s7); i++)
+		glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, s7[i]);
+
+	glRasterPos2f(340, 90);
+	for (i = 0; i < strlen(s8); i++)
+		glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, s8[i]);
+
+	glRasterPos2f(370, 90);
+	for (i = 0; i < strlen(s9); i++)
+		glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, s9[i]);
+
+	glRasterPos2f(400, 90);
+	for (i = 0; i < strlen(s10); i++)
+		glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, s10[i]);
+
+
+	glRasterPos2f(65, 150);     //signals
+	for (i = 0; i < strlen(sn1); i++)
+		glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, sn1[i]);   //eddu  signals display  gee
+
+	glRasterPos2f(65, 200);
+	for (i = 0; i < strlen(sn2); i++)
+		glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, sn2[i]);   //eddu time display  gee
+
+	glRasterPos2f(65, 250);
+	for (i = 0; i < strlen(sn3); i++)
+		glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, sn3[i]);   //eddu time display  gee
+
+	glRasterPos2f(65, 300);
+	for (i = 0; i < strlen(sn4); i++)
+		glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, sn4[i]);
+
+	glRasterPos2f(65, 350);
+	for (i = 0; i < strlen(sn5); i++)
+		glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, sn5[i]);
+
+
+	glColor3f(1.0, 1.0, 0.0);
+	glRasterPos2f(460, 350);
+	for (i = 0; i < strlen(sca); i++)
+		glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, sca[i]);   //eddu time display  gee
+
+	glRasterPos2f(460, 400);
+	for (i = 0; i < strlen(sca1); i++)
+		glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, sca1[i]);   //eddu time display  gee
+
+
+	glRasterPos2f(460, 450);
+	for (i = 0; i < strlen(sca2); i++)
+		glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, sca2[i]);   //eddu time display  gee
+
+	glColor3f(0.0, 1.0, 1.0);
+	glRasterPos2f(430, 330);
+	for (i = 0; i < strlen(in); i++)
+		glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, in[i]);   //eddu time display  gee
+
+
+	glRasterPos2f(75, 90);
+	for (i = 0; i < strlen(sn5); i++)
+		glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, org[i]);
+
+
+	signaldetect();
+	glFlush();// Required to copy color buffer onto the screen.
+	glutSwapBuffers();
+}
+
+
+
+void main(int argc, char** argv) {  // Initialize GLUT and 
+
+	glutInit(&argc, argv);
+	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);// Use single color buffer and no depth buffer.
+	glutInitWindowSize(1000, 800); // Size of display area, in pixels.
+   // Location of window in screen coordinates.
+	glutCreateWindow("lines"); // Parameter is window title.
+	//glutReshapeFunc(resize);
+	glutDisplayFunc(display);// Called when the window needs to be redrawn.
+	glutMainLoop();
+
+}
